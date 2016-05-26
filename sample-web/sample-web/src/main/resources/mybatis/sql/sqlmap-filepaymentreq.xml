@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="filePaymentRequest">
+	<resultMap id="filePaymentRequestMap" type="map">
+		<result property="mid" column="mid" />
+		<result property="status" column="status" />
+		<result property="resultCode" column="result_code" />
+		<result property="resultMsg" column="result_msg" />
+		<result property="waitingJob" column="waiting_jobs" />
+		<result property="jobId" column="job_id" />
+		<result property="uploadFile" column="upload_file" />
+		<result property="uploadDate" column="upload_date" />
+		<result property="verifyMessage" column="verify_message" />
+	</resultMap>
+
+	<select id="selectFilePaymentRequest" resultMap="filePaymentRequestMap">
+		SELECT * FROM FILE_PAYMENT_REQUEST
+	</select>
+	
+	<insert id="insertFilePaymentRequest" parameterType="map">
+		INSERT INTO FILE_PAYMENT_REQUEST VALUES(default, #{status}, #{result_code}, #{result_msg},  #{waiting_jobs}, #{job_id}, #{upload_file}, #{upload_date}, 'not yet')
+	</insert>
+	
+	<update id="updateNotificationVerify" parameterType="map">
+		UPDATE 
+			FILE_PAYMENT_REQUEST
+		SET
+			VERIFY_MESSAGE = #{verifyResult}
+		WHERE
+			JOB_ID = #{jobId}
+	</update>
+	
+</mapper>
