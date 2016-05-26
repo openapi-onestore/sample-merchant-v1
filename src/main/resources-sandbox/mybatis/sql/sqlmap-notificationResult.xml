@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="notificationResult">
+	<resultMap id="notificationResultMap" type="map">
+		<result property="jobId" column="job_id" />
+		<result property="event" column="event" />
+		<result property="status" column="status" />
+		<result property="updateDate" column="update_date" />
+		<result property="notiVersion" column="noti_version" />
+	</resultMap>
+	
+	<select id="selectNotificationResult" parameterType="map" resultMap="notificationResultMap">
+		SELECT * FROM FILE_PAYMENT_NOTI_RESULT
+		WHERE JOB_ID=#{jobId}
+	</select>
+	
+	<insert id="insertNotificationResult" parameterType="map">
+		INSERT INTO FILE_PAYMENT_NOTI_RESULT VALUES(#{jobId}, #{event}, #{status}, #{updateDate}, #{notifyVersion})
+	</insert>
+</mapper>
